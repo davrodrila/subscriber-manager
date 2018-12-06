@@ -2,18 +2,14 @@
 
 namespace Tests\Feature;
 
-use Tests\SubscriberTestCase;
+use Tests\SubscriberApiTestCase;
 use Tests\TestCase;
 use Illuminate\Foundation\Testing\WithFaker;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 
-class SubscriberDeleteTest extends SubscriberTestCase
+class SubscriberDeleteApiTest extends SubscriberApiTestCase
 {
 
-    /*
-     * DELETE /subscribers/{subscriber} tests
-     * TODO: When the Field model is working, we will have to check for proper deletion
-     */
     public function testIfDeletingUserReturnsNoContent()
     {
         $random_subscriber = \App\Subscriber::all()->random();

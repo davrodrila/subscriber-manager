@@ -2,12 +2,12 @@
 
 namespace Tests\Feature;
 
-use Tests\SubscriberTestCase;
+use Tests\SubscriberApiTestCase;
 use Tests\TestCase;
 use Illuminate\Foundation\Testing\WithFaker;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 
-class SubscribersEditTest extends SubscriberTestCase
+class SubscribersEditApiTest extends SubscriberApiTestCase
 {
     /*
      * PUT /subscribers/{subscribers} tests

@@ -2,13 +2,13 @@
 
 namespace Tests\Feature;
 
-use Tests\SubscriberTestCase;
+use Tests\SubscriberApiTestCase;
 use Tests\TestCase;
 use App\State;
 use Illuminate\Foundation\Testing\WithFaker;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 
-class SubscriberCreationTest extends SubscriberTestCase
+class SubscriberCreationApiTest extends SubscriberApiTestCase
 {
 
     public function testIfCreatedGivesProperResponse()

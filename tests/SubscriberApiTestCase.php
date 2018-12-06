@@ -4,7 +4,7 @@ namespace Tests;
 
 use Illuminate\Foundation\Testing\TestCase as BaseTestCase;
 
-abstract class SubscriberTestCase extends TestCase
+abstract class SubscriberApiTestCase extends TestCase
 {
     public function setUp()
     {

@@ -3,12 +3,12 @@
 namespace Tests\Feature;
 
 use App\State;
-use Tests\SubscriberTestCase;
+use Tests\SubscriberApiTestCase;
 use Tests\TestCase;
 use Illuminate\Foundation\Testing\WithFaker;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 
-class SuscribersApiTest extends SubscriberTestCase
+class SuscribersApiApiTest extends SubscriberApiTestCase
 {
 
     /*
