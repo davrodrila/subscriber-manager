@@ -23,16 +23,6 @@ class SubscriberController extends Controller
     }
 
     /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-
-    }
-
-    /**
      * Store a newly created resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
@@ -66,17 +56,6 @@ class SubscriberController extends Controller
     }
 
     /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Subscriber  $subscriber
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(Subscriber $subscriber)
-    {
-        //
-    }
-
-    /**
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
@@ -104,6 +83,7 @@ class SubscriberController extends Controller
      */
     public function destroy(Subscriber $subscriber)
     {
+        $subscriber->fields()->delete();
         $subscriber->delete();
         return response('',204);
     }

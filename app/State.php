@@ -22,4 +22,9 @@ class State extends Model
 
         return $state;
     }
+
+    public function subscribers()
+    {
+        return $this->hasMany(Subscriber::class);
+    }
 }
