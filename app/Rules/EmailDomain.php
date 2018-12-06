@@ -20,7 +20,7 @@ class EmailDomain implements Rule
      * Determine if the email domain is from a valid host
      *
      * @param  string  $attribute
-     * @param  mixed  $value
+     * @param  string  $value An email address
      * @return bool
      */
     public function passes($attribute, $value)
@@ -48,6 +48,6 @@ class EmailDomain implements Rule
      */
     public function message()
     {
-        return ':attribute email host is not active';
+        return ':attribute host is not active';
     }
 }

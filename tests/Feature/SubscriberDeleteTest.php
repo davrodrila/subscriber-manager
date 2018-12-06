@@ -24,7 +24,7 @@ class SubscriberDeleteTest extends SubscriberTestCase
     public function testIfDeletedUserIsRemovedFromDatabase()
     {
         $random_subscriber = \App\Subscriber::all()->random();
-        $response = $this->delete('/api/v1/subscribers/' . $random_subscriber->id);
+        $this->delete('/api/v1/subscribers/' . $random_subscriber->id);
         $response = $this->get('/api/v1/subscribers/' . $random_subscriber->id);
         $response->assertStatus(404);
     }

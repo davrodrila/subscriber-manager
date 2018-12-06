@@ -85,7 +85,14 @@ class SubscriberController extends Controller
      */
     public function update(Request $request, Subscriber $subscriber)
     {
-        //
+        $validator = Validator::make($request->all(),[
+            'name' => ['required'],
+            'email' => ['required','email','unique:subscribers,'.$subscriber->id, new EmailDomain()]
+        ]);
+        if ($validator->fails()) return response($validator->errors(), 400);
+
+        $subscriber->update($request->all());
+        return response(['id'=>$subscriber->id],200);
     }
 
     /**
