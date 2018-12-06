@@ -37,6 +37,10 @@ class SubscriberController extends Controller
      */
     public function store(Request $request)
     {
+        $attributes = request()->validate([
+            'name' => ['required'],
+            'email' => ['required', 'email', ]
+            ]);
         $new_subscriber = new Subscriber();
         $new_subscriber->name = $request->name;
         $new_subscriber->email = $request->email;

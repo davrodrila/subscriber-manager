@@ -64,35 +64,5 @@ class SuscribersApiTest extends TestCase
         $response->assertStatus(200);
     }
 
-    /*
-     * POST /subscribers tests
-     */
-    public function testIfCreatedGivesProperResponse()
-    {
-        $this->populateSuscribers();
-
-        $response = $this->post('/api/v1/subscribers/',[
-            'name' => 'David Rodríguez',
-            'email' => 'davrodrila@gmail.com',
-        ]);
-
-        $response->assertStatus(201);
-    }
-
-    public function testIfDefaultStateIsUnconfirmed()
-    {
-        $this->populateSuscribers();
-
-        $response = $this->post('/api/v1/subscribers/',[
-            'name' => 'David Rodríguez',
-            'email' => 'davrodrila@gmail.com',
-        ]);
-
-        $id = \DB::getPdo()->lastInsertId();
-        $state = \App\State::getStateByName(State::$STATE_UNCONFIRMED);
-
-        $response = $this->get('/api/v1/subscribers/' . $id);
-        $response->assertJson(['state_id' => $state->id]);
-    }
 
 }
