@@ -42,21 +42,21 @@ class SubscriberController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Subscriber  $suscriber
+     * @param  \App\Subscriber  $subscriber
      * @return \Illuminate\Http\Response
      */
-    public function show(Subscriber $suscriber)
+    public function show(Subscriber $subscriber)
     {
-        //
+        return $subscriber;
     }
 
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Subscriber  $suscriber
+     * @param  \App\Subscriber  $subscriber
      * @return \Illuminate\Http\Response
      */
-    public function edit(Subscriber $suscriber)
+    public function edit(Subscriber $subscriber)
     {
         //
     }
@@ -65,10 +65,10 @@ class SubscriberController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Subscriber  $suscriber
+     * @param  \App\Subscriber  $subscriber
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Subscriber $suscriber)
+    public function update(Request $request, Subscriber $subscriber)
     {
         //
     }
@@ -76,10 +76,10 @@ class SubscriberController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Subscriber  $suscriber
+     * @param  \App\Subscriber  $subscriber
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Subscriber $suscriber)
+    public function destroy(Subscriber $subscriber)
     {
         //
     }
