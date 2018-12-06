@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\State;
 use App\Subscriber;
 use Illuminate\Http\Request;
 
@@ -25,7 +26,7 @@ class SubscriberController extends Controller
      */
     public function create()
     {
-        //
+
     }
 
     /**
@@ -36,7 +37,13 @@ class SubscriberController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $new_subscriber = new Subscriber();
+        $new_subscriber->name = $request->name;
+        $new_subscriber->email = $request->email;
+        $new_subscriber->state_id = State::getStateByName(State::$STATE_UNCONFIRMED)->id;
+        $new_subscriber->save();
+
+        return response(['id'=>$new_subscriber->id],201);
     }
 
     /**
