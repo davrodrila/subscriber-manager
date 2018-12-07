@@ -18,8 +18,8 @@ class SubscriberController extends Controller
      */
     public function index()
     {
-        $suscribers = Subscriber::all();
-        return $suscribers;
+        $subscribers = Subscriber::with('state')->get();
+        return $subscribers;
     }
 
     /**

@@ -11,7 +11,7 @@ class State extends Model
        The idea behind this is to avoid hard coding the values everywhere in the code.
      */
     public static $STATE_ACTIVE = "active";
-    public static $STATE_UNSUBSCRIBED = "unsuscribed";
+    public static $STATE_UNSUBSCRIBED = "unsubscribed";
     public static $STATE_JUNK = "junk";
     public static $STATE_BOUNCED = "bounced";
     public static $STATE_UNCONFIRMED = "unconfirmed";

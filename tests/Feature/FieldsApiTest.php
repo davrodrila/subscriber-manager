@@ -177,5 +177,41 @@ class FieldsApiTest extends SubscriberApiTestCase
         $response->assertJson(['title' =>'Test title']);
     }
 
+    public function testIfEditWithEmptyTitleReturnsBadRequest()
+    {
+        $subscriber = Field::all()->random()->subscriber;
+        $field = $subscriber->fields()->first();
+        $type = Type::all()->random();
+        $response = $this->put('/api/v1/subscribers/' . $subscriber->id . '/fields/' . $field->id, [
+            'title' => '',
+            'type' => $type,
+        ]);
+        $response->assertStatus(400);
+    }
+
+    public function testIfEditWithEmptyTypeReturnsBadRequest()
+    {
+        $subscriber = Field::all()->random()->subscriber;
+        $field = $subscriber->fields()->first();
+        $type = Type::all()->random();
+        $response = $this->put('/api/v1/subscribers/' . $subscriber->id . '/fields/' . $field->id, [
+            'title' => 'Test title',
+            'type' => '',
+        ]);
+        $response->assertStatus(400);
+    }
+    public function testIfEditWithNonExistentTypeReturnsBadRequest()
+    {
+        $subscriber = Field::all()->random()->subscriber;
+        $field = $subscriber->fields()->first();
+        $type = new Type();
+        $type->id = 9999;
+        $type->title = 'Test';
+        $response = $this->put('/api/v1/subscribers/' . $subscriber->id . '/fields/' . $field->id, [
+            'title' => '',
+            'type' => $type,
+        ]);
+        $response->assertStatus(400);
+    }
 
 }
