@@ -39,6 +39,7 @@ class FieldsApiTest extends SubscriberApiTestCase
         $subscriber = Field::all()->random()->subscriber;
         $count = $subscriber->fields()->count();
         $response = $this->get('/api/v1/subscribers/' . $subscriber->id  . '/fields');
+
         $response->assertJsonCount($count);
     }
 

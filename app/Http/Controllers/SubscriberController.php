@@ -52,6 +52,7 @@ class SubscriberController extends Controller
      */
     public function show(Subscriber $subscriber)
     {
+        $subscriber = Subscriber::with('state','fields')->where('id','=',$subscriber->id)->first();
         return $subscriber;
     }
 

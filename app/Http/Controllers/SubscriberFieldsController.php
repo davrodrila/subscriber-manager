@@ -17,7 +17,8 @@ class SubscriberFieldsController extends Controller
      */
     public function index(Subscriber $subscriber)
     {
-        return $subscriber->fields;
+        $fields = Field::with('type')->where('subscriber_id','=',$subscriber->id)->get();
+        return $fields;
     }
 
     /**

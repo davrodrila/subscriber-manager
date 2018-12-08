@@ -50712,38 +50712,67 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
 
-/*    function Subscriber({id, name, state}) {
-        this.id = id;
-        this.name = name;
-        this.state = new State(state);
-    }
+function Subscriber(_ref) {
+    var id = _ref.id,
+        name = _ref.name,
+        email = _ref.email,
+        state = _ref.state;
 
-    function State({id, name}) {
-        this.id = id;
-        this.name = name;
-    }
+    this.id = id;
+    this.name = name;
+    this.email = email;
+    this.state = new State(state);
+}
 
+function State(_ref2) {
+    var id = _ref2.id,
+        name = _ref2.name;
 
-    import SubscriberComponent from "./SubscriberTableComponent";*/
+    this.id = id;
+    this.name = name;
+}
+
+function Field(_ref3) {
+    var id = _ref3.id,
+        type = _ref3.type;
+
+    this.id = id;
+    this.type = new Type(type);
+}
+
 
 /* harmony default export */ __webpack_exports__["default"] = ({
-    components: { headnav: __WEBPACK_IMPORTED_MODULE_0__headnav___default.a },
-    /*data() {
+    props: ['id'],
+    data: function data() {
         return {
-            subscribers: []
-        }
+            subscriber: ''
+        };
     },
+
+    components: { headnav: __WEBPACK_IMPORTED_MODULE_0__headnav___default.a },
     methods: {
-        read() {
-            window.axios.get('/api/v1/subscribers').then(({data}) => {
-                data.forEach(sub => {
-                    this.subscribers.push(new Subscriber(sub));
-                });
+        read: function read(id) {
+            var _this = this;
+
+            window.axios.get('/api/v1/subscribers/' + id).then(function (_ref4) {
+                var data = _ref4.data;
+
+                _this.subscriber = new Subscriber(data);
+            });
+            window.axios.get('/api/v1/subscribers/' + id + '/fields').then(function (_ref5) {
+                var data = _ref5.data;
+
+                _this.subscriber = new Subscriber(data);
             });
         }
-    },*/
+    },
     created: function created() {
+        this.read(this.$route.params.id);
         window.scrollTo(0, 0);
     }
 });
@@ -50762,7 +50791,13 @@ var render = function() {
     [
       _c("headnav"),
       _vm._v(" "),
-      _c("h1", [_vm._v("Test " + _vm._s(_vm.name))])
+      _c("div", { staticClass: "row" }, [
+        _c("div", { staticClass: "col s12" }, [
+          _c("h3", { staticClass: "header grey-text darken-1 center-align" }, [
+            _vm._v("Show details of " + _vm._s(_vm.subscriber.name))
+          ])
+        ])
+      ])
     ],
     1
   )
