@@ -13,6 +13,7 @@ class Subscriber extends Model
     {
         return $this->belongsTo(State::class);
     }
+
     public function fields()
     {
         return $this->hasMany(Field::class);

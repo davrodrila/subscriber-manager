@@ -18,7 +18,7 @@ class State extends Model
 
     public static function getStateByName($state)
     {
-        $state = DB::table('states')->where('name','=',$state)->first();
+        $state = DB::table('states')->where('name', '=', $state)->first();
 
         return $state;
     }

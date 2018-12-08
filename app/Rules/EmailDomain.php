@@ -19,8 +19,8 @@ class EmailDomain implements Rule
     /**
      * Determine if the email domain is from a valid host
      *
-     * @param  string  $attribute
-     * @param  string  $value An email address
+     * @param  string $attribute
+     * @param  string $value An email address
      * @return bool
      */
     public function passes($attribute, $value)
@@ -37,7 +37,7 @@ class EmailDomain implements Rule
 
     public function getDomainFrom($email)
     {
-        $domain = substr($email, strrpos($email, '@')+1);
+        $domain = substr($email, strrpos($email, '@') + 1);
         return $domain;
     }
 

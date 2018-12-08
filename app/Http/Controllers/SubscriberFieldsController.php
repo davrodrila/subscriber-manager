@@ -17,7 +17,7 @@ class SubscriberFieldsController extends Controller
      */
     public function index(Subscriber $subscriber)
     {
-        $fields = Field::with('type')->where('subscriber_id','=',$subscriber->id)->get();
+        $fields = Field::with('type')->where('subscriber_id', '=', $subscriber->id)->get();
         return $fields;
     }
 
@@ -29,19 +29,21 @@ class SubscriberFieldsController extends Controller
      */
     public function store(Subscriber $subscriber, Request $request)
     {
-        $validator = Validator::make($request->all(),[
+        $validator = Validator::make($request->all(), [
             'title' => ['required'],
-            'type_id' =>['required', 'exists:types,id'],
+            'type_id' => ['required', 'exists:types,id'],
         ]);
 
-        if ($validator->fails()) return response($validator->errors(),400);
+        if ($validator->fails()) {
+            return response($validator->errors(), 400);
+        }
 
         $new_field = new Field();
         $new_field->title = $request->title;
         $new_field->type_id = $request->type_id;
         $new_field->subscriber_id = $subscriber->id;
         $new_field->save();
-        return response($new_field->id,200);
+        return response($new_field->id, 200);
     }
 
     /**
@@ -64,11 +66,13 @@ class SubscriberFieldsController extends Controller
      */
     public function update(Subscriber $subscriber, Field $field)
     {
-        $validator = Validator::make(request()->all(),[
+        $validator = Validator::make(request()->all(), [
             'title' => ['required'],
-            'type.id' =>['required', 'exists:types,id'],
+            'type.id' => ['required', 'exists:types,id'],
         ]);
-        if ($validator->fails()) return response($validator->errors(),400);
+        if ($validator->fails()) {
+            return response($validator->errors(), 400);
+        }
         $field->update(request()->all());
         return response($field, 200);
     }
@@ -82,6 +86,6 @@ class SubscriberFieldsController extends Controller
     public function destroy(Subscriber $subscriber, Field $field)
     {
         $field->delete();
-        return response('',204);
+        return response('', 204);
     }
 }

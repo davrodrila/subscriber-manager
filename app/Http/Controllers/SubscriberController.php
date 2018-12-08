@@ -25,54 +25,58 @@ class SubscriberController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param  \Illuminate\Http\Request $request
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
     {
-        $validator = Validator::make($request->all(),[
-                'name' => ['required'],
-                'email' => ['required','email','unique:subscribers', new EmailDomain()]
+        $validator = Validator::make($request->all(), [
+            'name' => ['required'],
+            'email' => ['required', 'email', 'unique:subscribers', new EmailDomain()]
         ]);
-        if ($validator->fails()) return response($validator->errors(), 400);
+        if ($validator->fails()) {
+            return response($validator->errors(), 400);
+        }
         $new_subscriber = new Subscriber();
         $new_subscriber->name = $request->name;
         $new_subscriber->email = $request->email;
         $new_subscriber->state_id = State::getStateByName(State::$STATE_UNCONFIRMED)->id;
         $new_subscriber->save();
 
-        return response(['id'=>$new_subscriber->id],201);
+        return response(['id' => $new_subscriber->id], 201);
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  \App\Subscriber  $subscriber
+     * @param  \App\Subscriber $subscriber
      * @return \Illuminate\Http\Response
      */
     public function show(Subscriber $subscriber)
     {
-        $subscriber = Subscriber::with('state','fields')->where('id','=',$subscriber->id)->first();
+        $subscriber = Subscriber::with('state', 'fields')->where('id', '=', $subscriber->id)->first();
         return $subscriber;
     }
 
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Subscriber  $subscriber
+     * @param  \Illuminate\Http\Request $request
+     * @param  \App\Subscriber $subscriber
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, Subscriber $subscriber)
     {
-        $validator = Validator::make($request->all(),[
+        $validator = Validator::make($request->all(), [
             'name' => ['required'],
-            'email' => ['required','email','unique:subscribers,'.$subscriber->id, new EmailDomain()]
+            'email' => ['required', 'email', 'unique:subscribers,' . $subscriber->id, new EmailDomain()]
         ]);
-        if ($validator->fails()) return response($validator->errors(), 400);
+        if ($validator->fails()) {
+            return response($validator->errors(), 400);
+        }
 
         $subscriber->update($request->all());
-        return response(['id'=>$subscriber->id],200);
+        return response(['id' => $subscriber->id], 200);
     }
 
     /**
@@ -86,6 +90,6 @@ class SubscriberController extends Controller
     {
         $subscriber->fields()->delete();
         $subscriber->delete();
-        return response('',204);
+        return response('', 204);
     }
 }
