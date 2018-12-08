@@ -4,7 +4,7 @@
         <div class="row center-align container">
             <div class="row">
                 <div class="col s12">
-                    <h3 class="header grey-text darken-1 center-align">New Subscriber</h3>
+                    <h3 class="header grey-text darken-1 center-align">Edit Subscriber</h3>
                 </div>
             </div>
             <div class="row center-align" v-if="errors.length" style="margin-left:40%;">
@@ -16,16 +16,16 @@
             <div class="row form-center" >
                 <div class="row">
                     <div class="input-field col s4">
-                        <input v-model="name" placeholder="Subscriber Name" required>
+                        <input v-model="subscriber.name" required>
                     </div>
                 </div>
                 <div class="row">
                     <div class="input-field col s4 ">
-                        <input v-model="email" placeholder="Subscriber eMail" required type="email">
+                        <input v-model="subscriber.email" required type="email">
                     </div>
                 </div>
                 <div class="row">
-                    <button @click="create()" class="btn waves-effect waves-light" type="submit" name="action">Add
+                    <button @click="update()" class="btn waves-effect waves-light" type="submit" name="action">Edit
                         <i class="material-icons right">send</i>
                     </button>
                 </div>
@@ -41,31 +41,45 @@
 <script>
     import headnav from "./headnav";
 
+    function Subscriber({id, name, email}) {
+        this.id = id;
+        this.name = name;
+        this.email = email;
+    }
+
     export default {
+
         components: {headnav},
         data() {
             return {
+                subscriber: '',
                 errors: [],
-                name: [],
-                email: [],
+                sub_id: [],
             }
         },
         methods: {
-            read() {
-            },
-            create() {
-                this.errors = [];
-                window.axios.post('/api/v1/subscribers', {
-                    'name': this.name,
-                    'email': this.email,
-                }).then(({data}) => {
-                    this.$router.push('/');
-                }).catch((error) => {
-                    this.errors.push(error.response.data);
+            read(id) {
+                window.axios.get('/api/v1/subscribers/' + id).then(({data}) => {
+                    this.subscriber = new Subscriber(data);
                 });
+            },update() {
+                this.errors = [];
+                window.axios.put('/api/v1/subscribers/' + this.subscriber.id, this.subscriber)
+                    .then(({data}) => {
+                        this.$router.push('/show/' + this.id);
+                    })
+                    .catch((error) => {
+                        if ('response' in error) {
+                            this.errors.push(error.response.data);
+                        }
+                    });
+
+                    ;
             }
         },
         created() {
+            this.id = this.$route.params.id;
+            this.read(this.$route.params.id)
             window.scrollTo(0, 0);
         }
 

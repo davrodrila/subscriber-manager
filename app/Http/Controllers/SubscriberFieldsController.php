@@ -31,14 +31,14 @@ class SubscriberFieldsController extends Controller
     {
         $validator = Validator::make($request->all(),[
             'title' => ['required'],
-            'type.id' =>['required', 'exists:types,id'],
+            'type_id' =>['required', 'exists:types,id'],
         ]);
 
         if ($validator->fails()) return response($validator->errors(),400);
 
         $new_field = new Field();
         $new_field->title = $request->title;
-        $new_field->type_id = $request->type->id;
+        $new_field->type_id = $request->type_id;
         $new_field->subscriber_id = $subscriber->id;
         $new_field->save();
         return response($new_field->id,200);

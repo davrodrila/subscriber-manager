@@ -10,7 +10,7 @@
         methods: {
             read(id) {
                 window.axios.delete('/api/v1/subscribers/' + id).then(({data}) => {
-                    this.$router.push('/');
+                    this.$router.push('/show/' + this.$route.params.id);
                 });
             }
         },
@@ -18,6 +18,5 @@
             this.read(this.$route.params.id);
             window.scrollTo(0, 0);
         },
-
     }
 </script>

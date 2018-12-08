@@ -74,7 +74,7 @@ class FieldsApiTest extends SubscriberApiTestCase
         $type = Type::all()->random();
         $response = $this->post('/api/v1/subscribers/' . $subscriber->id . '/fields/', [
             'title' => 'Test title',
-            'type' =>  $type,
+            'type_id' =>  $type->id,
         ]);
         $response->assertStatus(200);
     }
@@ -85,7 +85,7 @@ class FieldsApiTest extends SubscriberApiTestCase
         $type = Type::all()->random();
         $this->post('/api/v1/subscribers/' . $subscriber->id . '/fields/', [
             'title' => 'Test title',
-            'type' =>  $type,
+            'type_id' =>  $type->id,
         ]);
         $id = \DB::getPdo()->lastInsertId();
         $response = $this->get('/api/v1/subscribers/' . $subscriber->id . '/fields/' . $id);

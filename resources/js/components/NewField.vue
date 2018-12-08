@@ -4,24 +4,28 @@
         <div class="row center-align container">
             <div class="row">
                 <div class="col s12">
-                    <h3 class="header grey-text darken-1 center-align">New Subscriber</h3>
+                    <h3 class="header grey-text darken-1 center-align">New Field</h3>
                 </div>
             </div>
             <div class="row center-align" v-if="errors.length" style="margin-left:40%;">
                 <div class="row red lighten-3 col  s4">
-                    <p v-if="errors[0].name">{{errors[0].name[0]}}</p>
-                    <p v-if="errors[0].email">{{errors[0].email[0]}}</p>
+                    <p v-if="errors[0].title">{{errors[0].title[0]}}</p>
+                    <p v-if="errors[0].type">{{errors[0].type[0]}}</p>
                 </div>
             </div>
             <div class="row form-center" >
                 <div class="row">
                     <div class="input-field col s4">
-                        <input v-model="name" placeholder="Subscriber Name" required>
+                        <input v-model="title" placeholder="Field Title" required>
                     </div>
                 </div>
                 <div class="row">
                     <div class="input-field col s4 ">
-                        <input v-model="email" placeholder="Subscriber eMail" required type="email">
+                        <select class = "browser-default" v-model="current_type">
+                            <option v-for="type in types" :value="type.id">
+                                {{ type.name }}
+                            </option>
+                        </select>
                     </div>
                 </div>
                 <div class="row">
@@ -41,31 +45,43 @@
 <script>
     import headnav from "./headnav";
 
+    function Type({id,name}) {
+        this.id = id;
+        this.name = name;
+    }
     export default {
         components: {headnav},
         data() {
             return {
                 errors: [],
-                name: [],
-                email: [],
+                title: [],
+                current_type: [],
+                types: [],
+                sub_id : [],
             }
         },
         methods: {
             read() {
+                window.axios.get('/api/v1/types').then(({data}) => {
+                    data.forEach(t => {
+                        this.types.push(new Type(t));
+                    });
+                });
             },
             create() {
-                this.errors = [];
-                window.axios.post('/api/v1/subscribers', {
-                    'name': this.name,
-                    'email': this.email,
+                window.axios.post('/api/v1/subscribers/' + this.sub_id + '/fields', {
+                    'title': this.title,
+                    'type_id': this.current_type
                 }).then(({data}) => {
-                    this.$router.push('/');
+                    this.$router.push('/show/' + this.sub_id);
                 }).catch((error) => {
                     this.errors.push(error.response.data);
                 });
             }
         },
         created() {
+            this.sub_id = this.$route.params.sub_id;
+            this.read()
             window.scrollTo(0, 0);
         }
 

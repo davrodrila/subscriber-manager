@@ -29,6 +29,10 @@ import App from './components/App'
 import Show_subscriber from './components/ShowSubscriberComponent';
 import Delete_subscriber from './components/DeleteSubscriber';
 import New_subscriber from './components/NewSubscriber';
+import Edit_subscriber from './components/EditSubscriber';
+import Delete_field from './components/DeleteField';
+import New_field from './components/NewField';
+import Edit_field from './components/EditField'
 /**
  * Next, we will create a fresh Vue application instance and attach it to
  * the page. Then, you may begin adding components to this application
@@ -54,21 +58,42 @@ const router = new VueRouter({
             component: Delete_subscriber,
         },
         {
-            path: 'new',
+            path: '/new',
             name: 'new_subscriber',
             component: New_subscriber
+        },
+        {
+            path: '/edit/:id',
+            name: 'edit_subscriber',
+            component: Edit_subscriber,
+        },
+        {
+            path: '/delete/:sub_id/field/:id',
+            name: 'delete_field',
+            component: Delete_field,
+        },
+        {
+            path: '/new/:sub_id/field/',
+            name: 'new_field',
+            component: New_field,
+        },
+        {
+            path: '/edit:sub_id/field/:id',
+            name: 'edit_field',
+            component: Edit_field,
         }
 
     ]
 });
 
 router.beforeEach((to, from, next) => {
-    NProgress.start()
-    next()
-})
+    NProgress.start();
+    next();
+});
 router.afterEach(() => {
-    NProgress.done()
-})
+    NProgress.done();
+});
+
 const app = new Vue({
     el: '#app',
     router

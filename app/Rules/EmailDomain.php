@@ -48,6 +48,6 @@ class EmailDomain implements Rule
      */
     public function message()
     {
-        return ':attribute host is not active';
+        return 'Email host is not active';
     }
 }

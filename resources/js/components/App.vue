@@ -6,7 +6,7 @@
                 <h3 class="header grey-text darken-1 center-align">Current Subscribers</h3>
             </div>
         </div>
-        <div class="row">
+        <div class="row container">
             <div class="col s12 centered center-align">
                 <table class="striped responsive-table centered">
                     <thead>
