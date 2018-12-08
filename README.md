@@ -1,7 +1,7 @@
 # Subscribers Manager
 A simple app that provides a REST API to manage subscribers and associated fields made using Laravel for the API and Vue.js and Vue-Routes as a helper to make it a Single Page Application.
 
-#Instructions
+# Instructions
 Clonate the git repository and run 
 ```
 composer install
