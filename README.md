@@ -20,3 +20,13 @@ php artisan serve
 ```
 
 And type the url provided on the console.
+
+# Testing
+Tests for the REST API have been written, they can be run using phpunit. To run the tests on Linux:
+```
+.\vendor\bin\phpunit
+```
+On Windows:
+```
+.\vendor\bin\phpunit.bat
+```
