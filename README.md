@@ -1,5 +1,5 @@
 # Subscribers Manager
-A simple app that provides a REST API to manage subscribers and associated fields made using Laravel for the API and Vue.js and Vue-Routes as a helper to make it a Single Page Application.
+A simple app that provides a REST API to manage subscribers and associated fields. The goal of this small app is to teach myself Laravel using TDD aswell as getting started with Vue.JS on the front. I took the chance of learning how to make SPA's as I never had done anything like it, for that I used Vue-Routes.
 
 # Instructions
 Clonate the git repository and run 
